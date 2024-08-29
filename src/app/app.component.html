@@ -179,6 +179,32 @@
 
 <main class="main">
   <div class="content">
+    <div>
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="nombre">Nombre</label>
+          <input id="nombre" formControlName="nombre">
+          <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+            <small *ngIf="formulario.get('nombre')?.hasError('required')">El nombre es obligatorio.</small>
+            <small *ngIf="formulario.get('nombre')?.hasError('minlength')">El nombre debe tener al menos 3 caracteres.</small>
+          </div>
+        </div>
+      
+        <div>
+          <label for="email">Email</label>
+          <input id="email" formControlName="email">
+          <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+            <small *ngIf="formulario.get('email')?.hasError('required')">El email es obligatorio.</small>
+            <small *ngIf="formulario.get('email')?.hasError('email')">El email no es válido.</small>
+          </div>
+        </div>
+      
+        <div>
+          <label for="mensaje">Mensaje</label>
+          <tex
+      
+    </div>
+
     <div class="left-side">
       <svg
         xmlns="http://www.w3.org/2000/svg"
