@@ -1,24 +1,25 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient} from '@angular/common/http';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'front_PT';
   formulario: FormGroup;
   URL = "http://localhost:8080"
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.formulario = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      edad: new FormControl('', [Validators.required]),
       mensaje: new FormControl('', [Validators.required, Validators.minLength(10)])
     });
   }
