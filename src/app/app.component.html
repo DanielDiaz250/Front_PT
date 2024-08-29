@@ -18,6 +18,8 @@
             <small *ngIf="formulario.get('edad')?.hasError('required')"> es obligatorio.</small>
           </div>
         </div>
+
+        <button type="submit" [disabled]="formulario.invalid">Enviar</button>
       
       </form>
       

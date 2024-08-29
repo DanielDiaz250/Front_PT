@@ -20,17 +20,34 @@ export class AppComponent {
     this.formulario = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
       edad: new FormControl('', [Validators.required]),
-      mensaje: new FormControl('', [Validators.required, Validators.minLength(10)])
     });
   }
+
+  ngOnInit(): void {  
+    console.log("valido: ", this.formulario.valid)
+  
+  }
+
 
   onSubmit() {
     if (this.formulario.valid) {
       console.log(this.formulario.value);
-      const result = this.http.post(`${this.URL}/crear_estudiante`, this.formulario.value); 
-      console.log("resultado", result);
+      this.crearEstudiante(this.formulario.value)
+      .pipe()
+      .subscribe(data => {
+          console.log(data);
+        },
+        error => {
+          console.error('Error al obtener datos:', error);
+        }
+      );
+
     } else {
       console.log('Formulario no válido');
     }
+  }
+
+  crearEstudiante(form: any) {
+    return this.http.post(`${this.URL}/crear_estudiante`, form); 
   }
 }
